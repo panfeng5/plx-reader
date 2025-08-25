@@ -664,6 +664,11 @@ void CPlxReaderDlg::OnExtract()
 			}
 			else if (dataBlock.Type == PL_ADDataType)
 			{
+				if (m_slowChannels[dataBlock.Channel].SpikeChannel <= 0)
+				{
+					continue;
+				}
+
 				float v = waveformSamples[0] * m_fileHeader.SlowMaxMagnitudeMV / (bpss_2 * m_slowChannels[dataBlock.Channel].Gain * m_slowChannels[dataBlock.Channel].PreAmpGain);
 				DbgStr("WF %d", count_datablock);
 				DbgStr(" %.4f", timestamp / 30000.0);
